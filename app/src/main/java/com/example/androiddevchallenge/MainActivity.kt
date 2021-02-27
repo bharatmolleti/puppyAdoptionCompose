@@ -23,6 +23,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -36,6 +37,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -287,6 +289,7 @@ fun PuppyDetailsScreen(puppy: Puppy, onBackPressed: () -> Unit) {
         ) {
             Box(
                 modifier = Modifier
+                    .weight(1f)
                     .padding(bottom = 40.dp)
                     .align(alignment = Alignment.CenterHorizontally)
             ) {
@@ -294,32 +297,58 @@ fun PuppyDetailsScreen(puppy: Puppy, onBackPressed: () -> Unit) {
                     data = puppy.imageUrl,
                     contentDescription = "Image",
                     fadeIn = true,
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier.fillMaxWidth()
+                    contentScale = ContentScale.Inside
                 )
             }
             Column(
                 modifier = Modifier.background(
                     color = MaterialTheme.colors.secondaryVariant
-                )
+                ).weight(1f)
             ) {
-                Text(
-                    text = puppy.name,
-                    style = MaterialTheme.typography.h6,
-                    modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
-                )
-                Spacer(modifier = Modifier.size(4.dp))
-                Text(
-                    text = puppy.character,
-                    style = MaterialTheme.typography.body1,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
-                Spacer(modifier = Modifier.size(4.dp))
-                Text(
-                    text = displayGender(gender = puppy.gender),
-                    style = MaterialTheme.typography.subtitle2,
-                    modifier = Modifier.padding(horizontal = 16.dp)
-                )
+
+                Row () {
+                    Column(
+                        modifier = Modifier.background(
+                            color = MaterialTheme.colors.secondaryVariant
+                        )
+                    ) {
+                        Text(
+                            text = puppy.name,
+                            style = MaterialTheme.typography.h6,
+                            modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)
+                        )
+                        Spacer(modifier = Modifier.size(4.dp))
+                        Text(
+                            text = puppy.character,
+                            style = MaterialTheme.typography.body1,
+                            modifier = Modifier.padding(horizontal = 16.dp)
+                        )
+                        Spacer(modifier = Modifier.size(4.dp))
+                        Text(
+                            text = displayGender(gender = puppy.gender),
+                            style = MaterialTheme.typography.subtitle2,
+                            modifier = Modifier.padding(horizontal = 16.dp)
+                        )
+                    }
+
+                    Row(horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        FloatingActionButton(
+                            modifier = Modifier
+                                .padding(16.dp),
+                            onClick = {
+                                //
+                            }
+                        ) {
+                            Text(
+                                text = stringResource(R.string.adopt),
+                                modifier = Modifier.padding(horizontal = 80.dp, vertical = 4.dp)
+                            )
+                        }
+                    }
+                }
+
                 Spacer(modifier = Modifier.size(12.dp))
                 Characteristics(puppy)
                 Spacer(modifier = Modifier.size(12.dp))
@@ -333,22 +362,10 @@ fun PuppyDetailsScreen(puppy: Puppy, onBackPressed: () -> Unit) {
                     Text(
                         text = puppy.description,
                         style = MaterialTheme.typography.body1.copy(lineHeight = 24.sp),
-                        modifier = Modifier.padding(horizontal = 16.dp)
-                    )
-
-                    FloatingActionButton(
                         modifier = Modifier
-                            .padding(16.dp)
-                            .align(Alignment.BottomEnd),
-                        onClick = {
-                            //
-                        }
-                    ) {
-                        Text(
-                            text = stringResource(R.string.adopt),
-                            modifier = Modifier.padding(horizontal = 80.dp, vertical = 4.dp)
-                        )
-                    }
+                            .padding(horizontal = 16.dp)
+                            .verticalScroll(rememberScrollState())
+                    )
                 }
             }
         }
