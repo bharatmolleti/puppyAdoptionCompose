@@ -9,5 +9,16 @@
       or implied. See the License for the specific language governing permissions and limitations under
       the License.
       -->
-    <string name="app_name">AndroidDevChallenge</string>
+    <string name="app_name">Puppy Adoption App</string>
+    <string name="puppy_body_info_n">%s Months Old / %s feet tall</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="gender_n">Gender: %s</string>
+    <string name="Location">%s</string>
+    <string name="header_line_1">Select a puppy to view details</string>
+    <string name="age">Age: %s Months</string>
+    <string name="height">Height: %s Feet</string>
+    <string name="color">Color: %s</string>
+    <string name="description">Description</string>
+    <string name="adopt">ADOPT</string>
 </resources>
