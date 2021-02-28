@@ -58,6 +58,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -115,12 +116,12 @@ object Routes {
 
 @Composable
 fun PuppyListScreen(puppies: List<Puppy>, onItemClicked: (puppy: Puppy) -> Unit) {
-    Column(modifier = Modifier.background(color = MaterialTheme.colors.primaryVariant)) {
+    Column(modifier = Modifier.background(color = MaterialTheme.colors.secondary)) {
         WelcomeSection()
         PuppyList(
             puppies = puppies,
             modifier = Modifier.background(
-                color = MaterialTheme.colors.secondaryVariant
+                color = MaterialTheme.colors.primary
             ),
             onItemClicked = {
                 onItemClicked(it)
@@ -135,20 +136,21 @@ fun WelcomeSection(modifier: Modifier = Modifier) {
         Row {
             Text(
                 text = stringResource(R.string.app_name),
-                color = MaterialTheme.colors.secondary,
+                color = MaterialTheme.colors.surface,
                 style = MaterialTheme.typography.subtitle1.copy(
                     fontSize = 18.sp,
                     fontFamily = FontFamily.Serif
                 )
             )
         }
-        Spacer(modifier = Modifier.size(4.dp))
+        Spacer(modifier = Modifier.size(6.dp))
         Text(
             text = stringResource(R.string.header_line_1),
-            color = MaterialTheme.colors.secondaryVariant,
+            color = MaterialTheme.colors.surface,
             style = MaterialTheme.typography.subtitle1.copy(
                 fontSize = 18.sp,
-                fontFamily = FontFamily.SansSerif
+                fontFamily = FontFamily.SansSerif,
+                fontStyle = FontStyle.Italic
             )
         )
     }
@@ -182,7 +184,7 @@ fun PuppyItem(puppy: Puppy, modifier: Modifier = Modifier) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
-            .background(color = MaterialTheme.colors.secondaryVariant)
+            .background(color = MaterialTheme.colors.primaryVariant)
             .padding(vertical = 8.dp, horizontal = 16.dp)
             .fillMaxWidth()
     ) {
@@ -215,12 +217,12 @@ fun PuppyInfo(puppy: Puppy) {
     Column {
         Text(
             text = puppy.name,
-            color = MaterialTheme.colors.primary,
+            color = MaterialTheme.colors.surface,
             style = MaterialTheme.typography.h6
         )
         Text(
             text = puppy.character,
-            color = MaterialTheme.colors.primaryVariant,
+            color = MaterialTheme.colors.surface,
             style = MaterialTheme.typography.body2
         )
         Spacer(modifier = Modifier.size(8.dp))
@@ -230,13 +232,13 @@ fun PuppyInfo(puppy: Puppy) {
                 puppy.ageInMonth.toString(),
                 puppy.height.toString()
             ),
-            color = MaterialTheme.colors.primaryVariant,
+            color = MaterialTheme.colors.surface,
             style = MaterialTheme.typography.caption
         )
         Spacer(modifier = Modifier.size(8.dp))
         Text(
             text = displayGender(gender = puppy.gender),
-            color = MaterialTheme.colors.primaryVariant,
+            color = MaterialTheme.colors.surface,
             style = MaterialTheme.typography.subtitle2
         )
         Spacer(modifier = Modifier.size(8.dp))
@@ -245,7 +247,7 @@ fun PuppyInfo(puppy: Puppy) {
             Spacer(modifier = Modifier.size(4.dp))
             Text(
                 text = stringResource(id = R.string.Location, puppy.location),
-                color = MaterialTheme.colors.primaryVariant,
+                color = MaterialTheme.colors.surface,
                 style = MaterialTheme.typography.caption
             )
         }
@@ -267,7 +269,7 @@ fun displayGender(gender: Gender): String {
 fun PuppyDetailsScreen(puppy: Puppy, onBackPressed: () -> Unit) {
     Scaffold(
         topBar = {
-            TopAppBar(elevation = 0.dp, backgroundColor = MaterialTheme.colors.primaryVariant) {
+            TopAppBar(elevation = 0.dp, backgroundColor = MaterialTheme.colors.secondary) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = "Back",
@@ -301,15 +303,17 @@ fun PuppyDetailsScreen(puppy: Puppy, onBackPressed: () -> Unit) {
                 )
             }
             Column(
-                modifier = Modifier.background(
-                    color = MaterialTheme.colors.secondaryVariant
-                ).weight(1f)
+                modifier = Modifier
+                    .background(
+                        color = MaterialTheme.colors.primary
+                    )
+                    .weight(1f)
             ) {
 
                 Row () {
                     Column(
                         modifier = Modifier.background(
-                            color = MaterialTheme.colors.secondaryVariant
+                            color = MaterialTheme.colors.primary
                         )
                     ) {
                         Text(
@@ -391,13 +395,14 @@ private fun CharacteristicChip(text: String) {
     Surface(
         modifier = Modifier.padding(horizontal = 12.dp),
         shape = RoundedCornerShape(8.dp),
-        color = MaterialTheme.colors.secondary,
+        color = MaterialTheme.colors.primaryVariant,
         border = BorderStroke(width = 1.dp, color = Color.Gray)
     ) {
         Text(
             text = text,
             modifier = Modifier.padding(vertical = 8.dp, horizontal = 12.dp),
-            style = MaterialTheme.typography.caption
+            style = MaterialTheme.typography.caption,
+            color = MaterialTheme.colors.surface
         )
     }
 }
