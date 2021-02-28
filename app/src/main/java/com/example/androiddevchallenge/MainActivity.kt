@@ -310,7 +310,7 @@ fun PuppyDetailsScreen(puppy: Puppy, onBackPressed: () -> Unit) {
                     .weight(1f)
             ) {
 
-                Row () {
+                Row() {
                     Column(
                         modifier = Modifier.background(
                             color = MaterialTheme.colors.primary
@@ -335,7 +335,8 @@ fun PuppyDetailsScreen(puppy: Puppy, onBackPressed: () -> Unit) {
                         )
                     }
 
-                    Row(horizontalArrangement = Arrangement.End,
+                    Row(
+                        horizontalArrangement = Arrangement.End,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         FloatingActionButton(
